@@ -20,6 +20,37 @@ exports.createRecord = async (req,res)=>{
     }
 };
 
+//getRecord
+exports.getRecords = async (req, res) => {
+  try {
+
+    const { type, category, date} = req.query;
+
+    let filter = {
+      createdBy: req.user.id
+    };
+
+    if (type) filter.type = type;
+    if (category) filter.category = category;
+
+    if (date) {
+      filter.date = {
+        $gte: new Date(startDate),
+        $lte: new Date(endDate)
+      };
+    }
+
+    const records = await Record.find(filter);
+
+    res.json(records);
+
+  } catch (error) {
+    res.status(500).json({
+      error: error.message
+    });
+  }
+};
+
 //update records
 exports.updateRecord = async(req,res) => {
     try{
