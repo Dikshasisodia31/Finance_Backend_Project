@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import user from "./user";
 
 const recordSchema = new mongoose.Schema({
     amount:{
@@ -15,8 +16,13 @@ const recordSchema = new mongoose.Schema({
        default:"income",
     },
     date:{
-        type:date,
+        type:Date,
+        default:Date.now
     },
+    createdBy:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"user"
+    }
 
 },{timestamps:true});
 
