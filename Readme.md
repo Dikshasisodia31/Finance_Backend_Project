@@ -64,7 +64,7 @@ src/
  ├── models
  ├── routes
  ├── config
- └── app.js
+ └── index.js
 ```
 
 ---
